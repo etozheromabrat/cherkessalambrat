@@ -18,7 +18,8 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  * Четырехзначное число назовем счастливым, если сумма первых двух ее цифр равна сумме двух последних.
  * Определить, счастливое ли заданное число, вернуть true, если это так.
  */
-fun isNumberHappy(number: Int): Boolean = TODO()
+fun isNumberHappy(number: Int): Boolean =
+    (number / 1000) % 10 + (number / 100) % 10 == (number / 10) % 10 + number % 10
 
 /**
  * Простая
@@ -27,7 +28,8 @@ fun isNumberHappy(number: Int): Boolean = TODO()
  * Определить, угрожают ли они друг другу. Вернуть true, если угрожают.
  * Считать, что ферзи не могут загораживать друг друга.
  */
-fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
+fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
+    x1 == x2 || y1 == y2 || (x1 + x2) * (x1 + x2) == (y1 + y2) * (y1 + y2) || (x1 - x2) * (x1 - x2) == (y1 - y2) * (y1 - y2)
 
 
 /**
@@ -36,7 +38,13 @@ fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean = TODO()
  * Дан номер месяца (от 1 до 12 включительно) и год (положительный).
  * Вернуть число дней в этом месяце этого года по григорианскому календарю.
  */
-fun daysInMonth(month: Int, year: Int): Int = TODO()
+fun daysInMonth(month: Int, year: Int): Int = when {
+    (month == 2) && (year % 4 == 0) && (year % 100 != 0) -> 29
+    (month == 2) && (year % 400 == 0) -> 29
+    (month == 2) -> 28
+    (month == 4) || (month == 6) || (month == 9) || (month == 11) -> 30
+    else -> 31
+}
 
 /**
  * Средняя
@@ -48,7 +56,7 @@ fun daysInMonth(month: Int, year: Int): Int = TODO()
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = TODO()
+): Boolean = sqr(x1 - x2) + sqr (y1 - y2) == sqr (r2 - r1)
 
 /**
  * Средняя
@@ -59,4 +67,4 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = ((a * b <= r * s) && sqr(a) + sqr(b) <= sqr(r) + sqr (s)) || ((a * c <= r * s) && sqr(a) + sqr(c) <= sqr(r) + sqr (s)) || ((c * b <= r * s) && sqr(c) + sqr(b) <= sqr(r) + sqr (s))
